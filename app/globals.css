@@ -9,5 +9,5 @@ body {
 
 .btn-blue {
   background-color: #2374d3;
-  color: white;
+  color: theme(colors.primary)
 }
