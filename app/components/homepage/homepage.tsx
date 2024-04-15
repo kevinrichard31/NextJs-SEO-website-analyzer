@@ -1,7 +1,7 @@
 "use client";
 import { addUrl } from '@/api';
 import React, { useState } from 'react';
-
+import Checklist from './checklist'
 interface Errors {
     size: string;
 }
@@ -24,11 +24,13 @@ function Homepage() {
 
     return (
         <div className="max-w-4xl m-auto p-5 sm:p-20">
-            <h1 className="text-base sm:text-4xl font-bold text-white drop-shadow-md">L'outil SEO surpuissant !</h1>
+            <h1 className="text-base sm:text-4xl font-bold text-white drop-shadow-md">Placez-vous en 1ère position,</h1>
             <h2 className="text-base sm:text-4xl font-extralight text-white drop-shadow-md">Analysez votre site en 15 secondes.</h2>
-            <div style={{ display: "flex", flexWrap: "wrap", marginTop: "45px" }} className='join'>
-                <span className='input input-bordered' style={{display: "flex", alignItems: "center", borderRadius: "8px 0px 0px 8px"}}><span style={{opacity:1, color:'white'}}>https://</span></span>
-                <input value={websiteUrl} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setWebsiteUrl(e.target.value)} type="text" placeholder="votresite.com" className="input input-bordered w-full max-w-xs" style={{borderRadius:"0px 8px 8px 0px"}} />
+            <div style={{ marginTop: "45px" }} className='join flex flex-wrap gap-4'>
+                <div className='flex'>
+                    <span className='input input-bordered' style={{display: "flex", alignItems: "center", borderRadius: "8px 0px 0px 8px"}}><span style={{opacity:1, color:'white'}}>https://</span></span>
+                    <input value={websiteUrl} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setWebsiteUrl(e.target.value)} type="text" placeholder="votresite.com" className="input input-bordered w-full max-w-xs" style={{borderRadius:"0px 8px 8px 0px"}} />
+                </div>
                 <button className="btn btn-blue" onClick={() => submitWebsite()}>Analyser mon site</button>
             </div>
             {!isFormValid && 
@@ -37,10 +39,12 @@ function Homepage() {
                     <span>URL invalide</span>
                 </div>
             }
-            <div>exemple de sites analysés</div>
+
             <button className="btn btn-outline">epiceriedusud.fr</button>
             <button className="btn btn-outline">www.durand-plomberie.com</button>
             <button className="btn btn-outline">www.lagranderecre.fr</button>
+
+            <Checklist />
         </div>
     );
 }
