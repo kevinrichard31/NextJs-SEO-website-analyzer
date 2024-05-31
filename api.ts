@@ -36,3 +36,18 @@ export const addUrl = async (url:any) => {
     throw error; // Re-throw the error to be handled by the calling code
   }
 };
+
+export const getIssues = async (siteId: string) => {
+  try {
+    const res = await fetch(`${baseUrl}/getIssuesHomepage/${siteId}`, {"cache": 'no-store'});
+    if (!res.ok) {
+      throw new Error(`Failed to fetch issues: ${res.status}`);
+    }
+
+    const results = await res.json();
+    return results;
+  } catch (error) {
+    console.error("Error fetching issues:", error);
+    throw error; // Re-throw the error to be handled by the calling code
+  }
+};
