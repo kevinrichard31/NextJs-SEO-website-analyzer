@@ -51,3 +51,24 @@ export const getIssues = async (siteId: string) => {
     throw error; // Re-throw the error to be handled by the calling code
   }
 };
+
+export const register = async (username:any, password:any) => {
+  try {
+    const res = await fetch(`${baseUrl}/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, password }),
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed to register user: ${res.status}`);
+    }
+
+    return res.json();
+  } catch (error) {
+    console.error("Error registering user:", error);
+    throw error;
+  }
+};
