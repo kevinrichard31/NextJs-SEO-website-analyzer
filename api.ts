@@ -1,4 +1,4 @@
-const baseUrl = "http://127.0.0.1:3001";
+export const baseUrl = "http://127.0.0.1:3001";
 
 export const getAllTodos = async () => {
   try {
@@ -52,14 +52,15 @@ export const getIssues = async (siteId: string) => {
   }
 };
 
-export const register = async (username:any, password:any) => {
+export const register = async (formData:any) => {
+
   try {
     const res = await fetch(`${baseUrl}/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify(formData),
     });
 
     if (!res.ok) {
@@ -70,5 +71,21 @@ export const register = async (username:any, password:any) => {
   } catch (error) {
     console.error("Error registering user:", error);
     throw error;
+  }
+};
+
+export const login = async (credentials: { email: string, password: string }) => {
+  try {
+      const response = await fetch(`${baseUrl}/login`, {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(credentials),
+      });
+      return await response.json();
+  } catch (error) {
+      console.error("Erreur lors de la connexion:", error);
+      throw error;
   }
 };
