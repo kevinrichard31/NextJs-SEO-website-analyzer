@@ -36,7 +36,7 @@ function Homepage() {
 
     async function fetchIssues() {
         try {
-            const issuesData = await getIssues("2");
+            const issuesData = await getIssues("1");
             setIssues(issuesData);
         } catch (error) {
             console.error("Error fetching issues:", error);

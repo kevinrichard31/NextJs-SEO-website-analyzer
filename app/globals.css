@@ -11,3 +11,8 @@ body {
   background-color: #2374d3;
   color: theme(colors.primary)
 }
+
+.imgLogo {
+  padding: 15px;
+  width: 200px;
+}

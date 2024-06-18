@@ -1,3 +1,5 @@
+import ThemeContext from "./context/context";
+import { useContext, useEffect } from "react";
 export const baseUrl = "http://127.0.0.1:3001";
 
 export const getAllTodos = async () => {
@@ -74,18 +76,37 @@ export const register = async (formData:any) => {
   }
 };
 
-export const login = async (credentials: { email: string, password: string }) => {
+export const login = async (formData:any) => {
   try {
       const response = await fetch(`${baseUrl}/login`, {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
           },
-          body: JSON.stringify(credentials),
+          body: JSON.stringify(formData),
       });
       return await response.json();
   } catch (error) {
       console.error("Erreur lors de la connexion:", error);
       throw error;
   }
+};
+
+export const fetchUserInfo = async () => {
+
+  const token = localStorage.getItem('token');
+  if (!token) {
+      return false;
+  }
+  const response = await fetch(`${baseUrl}/userInfo`, {
+    headers: {
+      'x-access-token': token,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  return await response.json();
 };

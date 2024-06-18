@@ -1,14 +1,18 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Header from '../components/header';
 import Footer from '../components/footer';
 import { baseUrl } from '@/api';
+import ThemeContext from '@/context/context';
 
 const Account = () => {
+    const context = useContext(ThemeContext)
     const [userInfo, setUserInfo] = useState<{ firstName: string, lastName: string, email: string } | null>(null);
     const [error, setError] = useState<string>("");
     const router = useRouter();
+
+    const { theme, connected, toggleTheme, setConnected } = context;
 
     useEffect(() => {
         const fetchUserInfo = async () => {
@@ -37,6 +41,12 @@ const Account = () => {
         fetchUserInfo();
     }, [router]);
 
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        setConnected(false)
+        router.push('/register');
+    };
+
     if (!userInfo) {
         return <div>Loading...</div>;
     }
@@ -52,6 +62,12 @@ const Account = () => {
                         <span>{error}</span>
                     </div>
                 )}
+                <button 
+                    onClick={handleLogout} 
+                    className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700"
+                >
+                    Se Déconnecter
+                </button>
             </div>
             <Footer />
         </div>

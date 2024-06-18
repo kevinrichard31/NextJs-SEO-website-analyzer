@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Jockey+One&display=swap');
+.containerHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+
+}
+
+.accountContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    font-size: 16px;
+    font-family: "Jockey One";
+}
+
+.iconLogin {
+    width: 26px;
+    font-size: 18px;
+}
